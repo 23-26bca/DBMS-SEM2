@@ -1,0 +1,52 @@
+table one of one
+CREATE TABLE Salesman_Master (
+    SalesmanNo VARCHAR(6) PRIMARY KEY CHECK (SalesmanNo LIKE 'S%'),
+    SalesmanName VARCHAR(10) NOT NULL,
+    Address VARCHAR(10) NOT NULL,
+    City VARCHAR(10),
+    Pincode NUMBER(8),
+    State VARCHAR(10),
+    SalaryAmt NUMBER(8) NOT NULL CHECK (SalaryAmt != 0),
+    SalesAmt NUMBER(10) NOT NULL,
+    Remarks VARCHAR(20) NOT NULL
+);
+
+table 2 of one
+CREATE TABLE Product_Master (
+    ProductNo VARCHAR(6) PRIMARY KEY CHECK (ProductNo LIKE 'P%'),
+    Description VARCHAR(10),
+    SalesmanNo VARCHAR(6),
+    FOREIGN KEY (SalesmanNo) REFERENCES Salesman_Master(SalesmanNo) ON DELETE CASCADE,
+    ProfitPercent NUMBER(4),
+    UnitMeasure VARCHAR(10),
+    QtyInHand NUMBER(8) NOT NULL,
+    Reorderlvl NUMBER(8) NOT NULL,
+    SellPrice NUMBER(8) NOT NULL CHECK (SellPrice != 0),
+    CostPrice NUMBER(8) NOT NULL CHECK (CostPrice != 0)
+);
+
+
+table one of two
+a) Create the relation to store client information called Client_Master.
+Attributes DataType Size Attribute Descriptionclientno Varchar 6 Primary Key, first letter must
+start with ‘C’
+name Varchar 10 Should not be null
+address1 Varchar 10
+address2 Varchar 10
+city Varchar 10
+pincode number 8
+state Varchar 10
+balance_due number 10
+
+table 2 of two
+CREATE TABLE Sales_Order (
+    OrderNo VARCHAR(6) PRIMARY KEY CHECK (OrderNo LIKE 'O%'),
+    ClientNo VARCHAR(6),
+    FOREIGN KEY (ClientNo) REFERENCES Client_Master(ClientNo),
+    OrderDate DATE NOT NULL,
+    Dest_Address VARCHAR(15),
+    SalesmanName VARCHAR(10),
+    DeliveryDate DATE,
+    BillPaid CHAR(1),
+    OrderStatus VARCHAR(10) CHECK (OrderStatus IN ('inprocess', 'fulfilled', 'returned', 'cancelled'))
+);
