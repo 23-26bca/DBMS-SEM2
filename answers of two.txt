@@ -1,0 +1,42 @@
+Insert a minimum of 4 records to the relations.
+insert into client_master
+values('C00001','jephy','abcd','dcba','chgns',689109,'kerala',2000);
+insert into client_master
+values('C00002','milan','bghj','hgfj','ptm',689105,'maharastra',3000);
+insert into client_master
+values('C00003','thulasi','sgss','gdfg','ktm',987564,'tamilnadu',5000);
+insert into client_master
+values('C00004','jagan','ewrgg','sdfwer','egsif',674574,'punjab',4000);
+insert into sales_order
+values('O00001','C00001','03jun2008','sgrg','jose','05jun2008','y','fulfilled’);
+insert into sales_order
+values('O00002','C00002','05jun2009','sgsd','jeswin','06jun2009','n','rturned');
+insert into sales_order
+values('O00003','C00003','09jan2008','hdgd','nabeel','11jan2008','y','cancelled');
+ insert into sales_order
+values('O00004','C00004','06jun2009','gfsd','amose','08jun2009','y','inprocess');
+1. Retrieve the entire contents of the client_master relation in the alphabetical order of
+their names.
+select * from client_master order by name asc;
+2. List all the clients who are not located in “Maharashtra”.
+ select * from client_master where state<>'maharastra';
+3. Change the balance_due of clientno “C00001” to Rs.1000
+update client_master set balance_due=1000 where clientno='C00001';
+4. Add a column called Telephone of data type number to client_master relation.
+alter table client_master add telephone number(10);
+5. List all information from the sales_order table for orders placed in the month of
+June, 2008.
+ select * from sales_order where orderdate between '01-jun-2008' and '30-jun-2008';
+6. List the names of all clients having ‘a’ as the second letter in their names.
+select * from client_master where name like '_a%';
+7. List the clientno’s whose order delivery has been made in the month of June, 2009
+but whose bills are not yet paid.
+ select c.clientno from client_master20 c join sales_order s on c.clientno=s.clientno
+ where s.orderdate between '01-jun-2009' and '30-jun-2009' and s.billpaid='n';
+
+ or
+
+ select c.clientno from client_master20 c join sales_order s on c.clientno=s.clientno
+ where s.orderdate between '01-jun-2009' and '30-jun-2009' and s.billpaid is null;
+8. Delete the client details located in Tamil Nadu.
+ delete from client_master where state ='tamilnadu';
