@@ -1,0 +1,20 @@
+1) Create table Sailors.
+
+
+create table sailors(sid integer primary key,sname varchar(25),rating integer,age integer);
+
+
+
+2)Create table Boats.
+
+
+create table boats(bid integer primary key,bname varchar(25),color varchar(25));
+
+
+
+3)Create table Reserves.
+
+
+create table reserves(sid integer,bid integer);
+
+
