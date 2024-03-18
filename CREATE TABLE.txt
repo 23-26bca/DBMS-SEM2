@@ -18,3 +18,34 @@ create table boats(bid integer primary key,bname varchar(25),color varchar(25));
 create table reserves(sid integer,bid integer);
 
 
+1)Find the names of salesmen who have a salary of 2000 to 5000 both inclusive. Order the result in descending order of the names.
+SELECT SalesmanName FROM Salesman WHERE Salary BETWEEN 2000 AND 5000 ORDER BY SalesmanName DESC;
+
+2)Change the city of the salesman “S003” to Mumbai.
+UPDATE Salesman SET City = 'Mumbai' WHERE SalesmanNo = 'S003';
+
+3)Change the size of the SalesmanName column size to varchar2(25)
+ALTER TABLE Salesman MODIFY SalesmanName VARCHAR2(25);
+
+4)What is Martin Jane’s address and sales amount? (If Martin Jane’s record is not present insert/update the record)
+[MERGE INTO Salesman s USING (SELECT 'Martin Jane' AS SalesmanName, 'desired_address' AS Address, 'desired_sales_amount' AS SalesAmount FROM dual) m ON (s.SalesmanName = m.SalesmanName)]
+WHEN MATCHED THEN
+
+UPDATE SET s.Address = m.Address, s.SalesAmount = m.SalesAmount
+
+WHEN NOT MATCHED THEN
+  INSERT (SalesmanName, Address, SalesAmount) VALUES (m.SalesmanName, m.Address, m.SalesAmount);
+5)List the names of all salesmen having ‘n’ as the third letter in their names.
+SELECT SalesmanName FROM Salesman WHERE SUBSTRING(SalesmanName, 3, 1) = 'n';
+
+6)List all the salesmen who do not stay in “Maharashtra” or “Tamil Nadu”. (If Maharashtra” or “Tamil Nadu record is not present update state)
+UPDATE Salesman SET State = 'Other' WHERE State NOT IN ('Maharashtra', 'Tamil Nadu');
+
+7)Find the salesmanNo of those salesmen who do not sell a product.
+SELECT DISTINCT s.SalesmanNo FROM Salesman s LEFT JOIN Sales s2 ON s.SalesmanNo = s2.SalesmanNo WHERE s2.SalesmanNo IS NULL;
+
+8)Delete the details of those salesmen whose remarks are “very poor”.
+DELETE FROM Salesman WHERE Remarks = 'very poor';
+
+9)Change the size of the selling price column in Product_Master relation to 10,3.
+ALTER TABLE Product_Master MODIFY SellingPrice NUMBER(10,3);
