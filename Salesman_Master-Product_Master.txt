@@ -1,4 +1,4 @@
-table one of one
+table 1 of 2
 CREATE TABLE Salesman_Master (
     SalesmanNo VARCHAR(6) PRIMARY KEY CHECK (SalesmanNo LIKE 'S%'),
     SalesmanName VARCHAR(10) NOT NULL,
@@ -11,7 +11,7 @@ CREATE TABLE Salesman_Master (
     Remarks VARCHAR(20) NOT NULL
 );
 
-table 2 of one
+table 2 of 2
 CREATE TABLE Product_Master (
     ProductNo VARCHAR(6) PRIMARY KEY CHECK (ProductNo LIKE 'P%'),
     Description VARCHAR(10),
