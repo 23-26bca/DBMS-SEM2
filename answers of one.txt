@@ -1,0 +1,45 @@
+Insert a minimum of 4 record:
+salesman_master:
+insert into salesman_master
+values('S001','jephy','chagnasher','ktm',686101,'kerala',5000,2000,'very good');
+ insert into salesman_master values('S002','jose','tvla','ptm',689105,'kerala',2000,500,'very
+poor');
+ insert into salesman_master
+values('S003','abel','tvla','ptm',689105,'kerala',10000,5000,'excellent');
+ insert into salesman_master
+values('S004','joe','tvla','ptm',689105,'kerala',10000,5000,'excellent');
+insert into salesman_master
+values('S005','martinjane','gdfgd','sdgfs',346565,'gsdgfgsf',16000,5000,'excellent');
+insert into salesman_master
+values('S005','dony','chagn','ktm',686101,'kerala',3000,1000,'good');
+product_master:
+insert into product_master values('P00001',' Floppies','S001',5,'Price',100,20,525,500);
+ insert into product_master values('P00002','monitor','S002',6,'price',10,3,12000,11280);
+ insert into product_master values('P00003','mouse','S003',5,'price',20,5,1050,1000);
+ insert into product_master values('P00004',' webcam','S001',2,'Price',10,3,3150,3050);
+1. Find the names of salesmen who have a salary of 2000 to 5000 both inclusive. Order
+the result in the descending order of the names.
+select salesmanname from salesman_master where salamt between 2000 and 5000
+order by salesmanname desc;
+2. Change the city of the salesman “S003” to Mumbai
+update salesman_master set city = 'mumbai' where salesmanno = 'S003';
+3. Change the size of the Salesmanname column size to varchar2(25 )
+alter table salesman_master modify salesmanname varchar(25);
+4. What is Martin Jane’s address and sales amount?alter
+( If Martin Jane’s record is not present insert/update the record)
+select address1,salesamt from salesman_master where salesmanname =
+'martinjane';
+5. List the names of all salesmen having ‘n’ as the third letter in their names.
+ select salesmanname from salesman_master where salesmanname like '__n%';
+6. List all the salesmen who do not stay in “Maharashtra” or “Tamil Nadu”.
+( If Maharashtra” or “Tamil Nadu record is not present update state )
+update salesman_master set city = 'maharastra' where salesmanno = 'S002';
+ update salesman_master set city = 'tamilnadu' where salesmanno = 'S004';
+ select * from salesman_master where city not in ('maharastra','tamilnadu');
+7. Find the salesmenno of those salesmen who do not sell a product.
+select salesmanno from salesman_master where salesmanno not in (select distinct
+salesmanno from product_master);
+8. Delete the details of those salesmen whose remarks is “very poor”.
+delete from salesman_master where remarks = 'very poor';
+9. Change the size of the selling price column in product_master relation to 10,3.
+alter table product_master modify sellprice number(10,3);
